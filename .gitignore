@@ -1,0 +1,8 @@
+__pycache__
+.tmp
+.venv
+stories42M.pt
+sweep_cfimdb_sequential.py
+result.txt
+sweep_outputs
+finetune-5-2e-05.pt

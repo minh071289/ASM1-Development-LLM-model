@@ -16,4 +16,6 @@ pip install scikit-learn==1.2.2
 pip install numpy==1.26.3
 pip install tokenizers==0.13.3
 pip install sentencepiece==0.1.99
-wget https://www.cs.cmu.edu/~vijayv/stories42M.pt
+# wget https://www.cs.cmu.edu/~vijayv/stories42M.pt
+# Model link from hgf since the original link is dead
+wget "https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.pt?download=true" -O stories42M.pt

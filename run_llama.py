@@ -72,7 +72,7 @@ def create_data(filename, tokenizer: Tokenizer, flag: str ='train', lower: bool 
 	num_labels = {}
 	data = []
 
-	with open(filename, 'r') as fp:
+	with open(filename, 'r', encoding='utf-8') as fp:
 		for line in fp:
 			label, org_sent = line.split(' ||| ')
 			if lower:
@@ -216,28 +216,26 @@ def generate_sentence(args, prefix, outfile, max_new_tokens = 75, temperature = 
 				print(f"Temperature is {temperature}")
 				print(sentence)
 				print('---------------')
-				writer = open(outfile, 'w')
+				writer = open(outfile, 'w', encoding='utf-8')
 				writer.write(sentence)
 				print(f"Wrote generated sentence to {outfile}.")
 				writer.close()
 
 def write_predictions_to_file(split: str, outfile: str, acc: float, pred: list[str], sents: list[str]):
-	with open(outfile, "w+") as f:
+	with open(outfile, "w+", encoding='utf-8') as f:
 		print(f"{split} acc :: {acc :.3f}")
 		for s, p in zip(sents, pred):
 			f.write(f"{p} ||| {s}\n")
 
 def test_with_prompting(args):
-	assert args.dev_out.endswith("dev-prompting-output.txt"), 'For saving prompting results, please set the dev_out argument as "<dataset>-dev-prompting-output.txt"'
-	assert args.test_out.endswith("test-prompting-output.txt"), 'For saving prompting results, please set the test_out argument as "<dataset>-test-prompting-output.txt"'
-
 	with torch.no_grad():
 
 		device = torch.device('cuda') if args.use_gpu else torch.device('cpu')
 		#### Load data
 		# create the data and its corresponding datasets and dataloader
 		tokenizer = Tokenizer(args.max_sentence_len)
-		label_names = json.load(open(args.label_names, 'r'))
+		with open(args.label_names, 'r', encoding='utf-8') as label_file:
+			label_names = json.load(label_file)
 		_, num_labels = create_data(args.train, tokenizer, 'train')
 
 		#### Init model
@@ -272,11 +270,9 @@ def test_with_prompting(args):
 		write_predictions_to_file("test", args.test_out, test_acc, test_pred, test_sents)
 
 def test(args):
-	assert args.dev_out.endswith("dev-finetuning-output.txt"), 'For saving finetuning results, please set the dev_out argument as "<dataset>-dev-finetuning-output.txt"'
-	assert args.test_out.endswith("test-finetuning-output.txt"), 'For saving finetuning results, please set the test_out argument as "<dataset>-test-finetuning-output.txt"'
 	with torch.no_grad():
 		device = torch.device('cuda') if args.use_gpu else torch.device('cpu')
-		saved = torch.load(args.filepath)
+		saved = torch.load(args.filepath, weights_only=False)
 		config = saved['model_config']
 		model = LlamaEmbeddingClassifier(config)
 		model.load_state_dict(saved['model'])
