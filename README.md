@@ -1,6 +1,11 @@
 # ASSIGNMENT 1: 
 # DEVELOPMENT MINIMALIST OF THE LLAMA2 MODEL (core components of Llama2)
 
+### Members
+- Nguyễn Thị Thanh Huyền - 23020381
+- Nguyễn Thị Minh Ly - 23020399
+- Đặng Minh Nguyệt - 23020407
+
 TO DO IN THIS ASSIGNMENT:
 - Implement some important components of the Llama2 model to better understanding its architecture. 
 - Perform sentence classification on sst dataset and cfimdb dataset with this model.
