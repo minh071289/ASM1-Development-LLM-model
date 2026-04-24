@@ -6,11 +6,11 @@
 - Nguyễn Thị Minh Ly - 23020399
 - Đặng Minh Nguyệt - 23020407
 
-TO DO IN THIS ASSIGNMENT:
+### TO DO IN THIS ASSIGNMENT:
 - Implement some important components of the Llama2 model to better understanding its architecture. 
 - Perform sentence classification on sst dataset and cfimdb dataset with this model.
 
-DETAIL:
+### DETAIL:
 The code to implement can be found in llama.py, classifier.py and optimizer.py. You are reponsible for writing core components of Llama2 (one of the leading open source language models). 
 In doing so, you will gain a strong understanding of neural language modeling. We will load pretrained weights for your language model from stories42M.pt; an 8-layer, 42M parameter language model pretrained on the TinyStories dataset (a dataset of machine-generated children's stories). Download tại link:  https://www.cs.cmu.edu/~vijayv/stories42M.pt
 This model is small enough that it can be trained (slowly) without a GPU. You are encouraged to use Colab or a personal GPU machine (e.g. a Macbook) to be able to iterate more quickly.
